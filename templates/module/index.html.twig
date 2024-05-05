@@ -1,0 +1,39 @@
+{# templates/module/index.html.twig #}
+
+{% extends 'sidebar.html.twig' %}
+
+{% block title %}Liste des Module{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Liste des Module</h1>
+        <a href="{{ path('module_create') }}" class="btn btn-primary mb-3">Créer un Nouvel module</a>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Durée</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for module in modules %}
+                        <tr>
+                            <th scope="row">{{ module.id }}</th>
+                            <td>{{ module.nom }}</td>
+                            <td>{{ module.duree }}</td>
+                            <td>
+                                <a href="{{ path('module_edit', {'id': module.id}) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{ path('module_delete', {'id': module.id}) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this module?')">Delete</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr><td colspan="6">No modules found</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

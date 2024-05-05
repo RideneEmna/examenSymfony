@@ -1,0 +1,41 @@
+{% extends 'sidebar.html.twig' %}
+
+{% block title %}Liste de Mes Formations{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Liste de Mes Formations</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID_Formation</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Modules</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for formation in formations %}
+                        <tr>
+                            <th scope="row">{{ formation.id }}</th>
+                            <td>{{ formation.date |date('Y-m-d') }}</td>
+                            <td>{{ formation.nom }}</td>
+                            <td>{{ formation.prix }}</td>
+                            <td>
+                                <ul>
+                                    {% for module in formation.module %}
+                                        <li>{{ module.nom }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>   
+                        </tr>
+                    {% else %}
+                        <tr><td colspan="5">No formations found</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

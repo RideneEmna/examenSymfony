@@ -1,0 +1,15 @@
+{# templates/patient/create.html.twig #}
+
+{% extends 'sidebar.html.twig' %}
+
+{% block title %}Créer un module{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Créer un module</h1>
+        <form action="{{ path('module_create') }}" method="post">
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+{% endblock %}

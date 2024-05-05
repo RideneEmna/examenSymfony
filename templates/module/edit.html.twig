@@ -1,0 +1,15 @@
+{# templates/module/edit.html.twig #}
+
+{% extends 'sidebar.html.twig' %}
+
+{% block title %}Modifier Module{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Modifier Module</h1>
+        <form action="{{ path('module_edit', {'id': module.id}) }}" method="post">
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary">Modifier</button>
+        </form>
+    </div>
+{% endblock %}

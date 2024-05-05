@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #ddd;
+        }
+
+        /* Make logout link red */
+        .sidebar .logout-link {
+            color: red;
+        }
+
+        /* Content Styles */
+        {# .content {
+            margin-left: 200px;
+            padding: 20px;
+            background-color: #fff; /* White background for content */
+            border-radius: 5px; /* Add some border radius for a nicer look */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+        } #}
+    </style>
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <ul class="nav flex-column">
+                         {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_module') }}">Gérer Modules</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_formation') }}">Gérer Formations</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{ path('user_formations', {'userId': app.user.id}) }}">Mes Formations</a>
+                        </li> 
+                        <!-- Logout Button -->
+                        <li class="nav-item">
+                            <a class="nav-link logout-link" href="{{ path('app_logout') }}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="content">
+                    {% block body %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block javascripts %}
+    {% endblock %}
+</body>
+</html>
